@@ -11,11 +11,11 @@ function Dog({ incorrect }: DogProps) {
 
   switch (incorrect) {
     case 1:
-      return <div><MinikvikWrong1 /></div> ;
+      return <MinikvikWrong1 />;
     case 2:
-      return <div><MinikvikWrong2 /></div> ;
+      return <MinikvikWrong2 />;
     default:
-      return <div><Minikvik /></div>;
+      return <Minikvik />;
   }
 }
 

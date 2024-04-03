@@ -1,10 +1,10 @@
 type SpeechBubbleProps = {
     description?: string;
 };
-function SpeechBubble({ description="test" }: SpeechBubbleProps) {
+function SpeechBubble({ description = "missing text" }: SpeechBubbleProps) {
     return (
         <div className='speechbubble'>
-            {description}
+            <p dangerouslySetInnerHTML={{ __html: description }} />
         </div>
     );
 }
