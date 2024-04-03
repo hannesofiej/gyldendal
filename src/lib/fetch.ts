@@ -26,15 +26,9 @@ export const fetcherWithFetch = async (url: string) => {
       url,
       {
         method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
         body: JSON.stringify(data),
       }
     );
-
-   
-  
     return response.json();
   };
 

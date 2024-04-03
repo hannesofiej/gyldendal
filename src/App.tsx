@@ -9,32 +9,33 @@ import Header from './components/header/Header';
 import SpeechBubble from './components/speechbubble/SpeechBubble';
 import Button from './components/button/Button';
 import Dog from './components/dog/Dog';
-import Answer from './components/answer/Answer';
+import TextField from './components/textField/TextField';
 
 
 interface Problem {
-  decription?: string;
-  id?: number;
+  description?: string;
+  id: number;
   introText?: string;
   problemText?: string;
 };
-interface CorrectAnswer {
-  decription?: string;
-  id?: number;
-  introText?: string;
-  problemText?: string;
+interface Status {
+  isCorrect: boolean,
+  correctAnswer: object
 };
 
 
 function App() {
 
-  const [problem, setProblem] = useState<Problem>({});
+  const [problem, setProblem] = useState<Problem>();
   const [inputValue, setInputValue] = useState('');
   const [checkValue, setCheckValue] = useState(false);
 
 
-  const [attempt, setAttempt] = useState(0);
-  const [correctAnswer, setCorrectAnswer] = useState<CorrectAnswer[]>([]);
+  const [status, setStatus] = useState<Status>();
+  const [incorrect, setIncorrect] = useState(0);
+  const [next, setNext] = useState(false);
+
+
 
   useEffect(() => {
     const fetchProblem = async () => {
@@ -42,7 +43,8 @@ function App() {
         const data = await fetchData(
           'https://glkltp5rvo76hkmz4fraevhshu0yluco.lambda-url.eu-central-1.on.aws/problem'
         );
-        setProblem(problem);
+        setProblem(data);
+        console.log(data)
       } catch (err) {
         console.log(err)
       } finally {
@@ -55,46 +57,67 @@ function App() {
   useEffect(() => {
     const postAnswer = async () => {
       try {
-        const body = {input0: inputValue}
+        const body = { input0: inputValue }
         const data = await postData(
           'https://glkltp5rvo76hkmz4fraevhshu0yluco.lambda-url.eu-central-1.on.aws/check',
           body
         );
         console.log(data)
+        setStatus(data)
+        setCheckValue(false)
       } catch (err) {
         console.log(err)
       } finally {
         console.log("done")
       }
     };
-    if(checkValue){
+    if (checkValue) {
       postAnswer();
     }
-    
+
   }, [checkValue]);
+
+  useEffect(() => {
+    
+    if(status){
+    
+      if (status?.isCorrect) {
+        
+      }else{
+        if(incorrect===2){
+          setNext(true)
+        }else{
+          setIncorrect(incorrect+1)
+        }
+        
+      }
+
+    }
+    
+
+
+  }, [status]);
 
   const checkAnswer = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log("check answer:", inputValue)
     setCheckValue(true)
   }
   const changeAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
-  
     setInputValue(event.target.value);
   }
 
   return (
     <div className="App">
-      <Header text={problem.introText} />
+      <Header text={problem?.introText} />
 
-      <Dog attempt={attempt} />
-      <SpeechBubble description="Kvik er en sød <b>hund</b>. Han elsker at lære nye ting." />
+      <Dog incorrect={incorrect} />
+      <SpeechBubble description={problem?.description} />
       <form>
-        <Answer problemtext="Kvik is a nice {{input0}}. He loves to learn new things." 
-        value={inputValue} 
-        onChange={changeAnswer} />
-        <Button text="Tjek mit svar" 
-        onClick={checkAnswer} />
+        <TextField incorrect={incorrect} problemtext={problem?.problemText}
+          value={inputValue}
+          onChange={changeAnswer} />
+        <Button incorrect={incorrect} text="Tjek mit svar"
+          onClick={checkAnswer} />
       </form>
     </div>
   );

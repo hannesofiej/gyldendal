@@ -1,0 +1,15 @@
+.button,button{
+    display: inline-block;
+    border: solid 1px #E28902;
+    padding: .6rem 3rem;
+    margin: 0;
+    text-decoration: none;
+    background: transparent;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}

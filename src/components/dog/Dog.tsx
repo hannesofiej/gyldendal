@@ -4,17 +4,18 @@ import { ReactComponent as MinikvikWrong1 } from '../../assets/svg/MiniKvikWrong
 import { ReactComponent as MinikvikWrong2 } from '../../assets/svg/MiniKvikWrong2.svg'
 
 type DogProps = {
-  attempt?: number;
+  incorrect?: number;
 };
 
-function Dog({ attempt }: DogProps) {
-  switch (attempt) {
+function Dog({ incorrect }: DogProps) {
+
+  switch (incorrect) {
     case 1:
-      return <MinikvikWrong1 />;
+      return <div><MinikvikWrong1 /></div> ;
     case 2:
-      return <MinikvikWrong2 />;
+      return <div><MinikvikWrong2 /></div> ;
     default:
-      return <Minikvik />;
+      return <div><Minikvik /></div>;
   }
 }
 
