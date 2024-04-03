@@ -1,0 +1,72 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.kvik{
+  font-size: 18px;
+}
+
+.answer{
+  background-image: url(./assets/Blyant.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px;
+
+  width: 60px;
+  padding:10px 0;
+  border: solid 1px #D9DBDE;
+  border-radius: 4px;
+}
+
+.speechbubble{
+  display: inline-block;
+  border:solid 2px #2078C9;
+  padding:10px;
+  font-style: italic;
+}
+
+.speechbubble::after{
+  display:block;
+  content:"";
+  width: 0px;
+   height: 0px;
+   border-style: solid;
+   border-width: 7px 12.1px 7px 0;
+   border-color: transparent #2078C9 transparent transparent;
+   transform: rotate(0deg);
+}
