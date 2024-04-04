@@ -14,9 +14,10 @@ interface FormProps {
     state: number;
     next: boolean;
     onStatusChange: (status: boolean) => void;
+    onReset: () => void;
 }
 
-const Form: React.FC<FormProps> = ({ next, problemtext, description, state, onStatusChange }) => {
+const Form: React.FC<FormProps> = ({ next, problemtext, description, state, onStatusChange, onReset }) => {
     const [inputValue, setInputValue] = useState('');
     const [checkValue, setCheckValue] = useState(false);
     const [correcting, setCorrecting] = useState(false);
@@ -44,8 +45,6 @@ const Form: React.FC<FormProps> = ({ next, problemtext, description, state, onSt
                 setCheckValue(false)
             } catch (err) {
                 console.log(err)
-            } finally {
-                console.log("done")
             }
         };
         if (checkValue) {
@@ -56,8 +55,14 @@ const Form: React.FC<FormProps> = ({ next, problemtext, description, state, onSt
 
     const checkAnswer = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        setCheckValue(true)
         setCorrecting(false)
+        if (next) {
+            setInputValue('')
+            onReset()
+        } else {
+            setCheckValue(true)
+        }
+
     }
     const changeAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCorrecting(true);
@@ -77,7 +82,7 @@ const Form: React.FC<FormProps> = ({ next, problemtext, description, state, onSt
         }
         return classes
     }
-    
+
     return (
         <form className={`form ${classNames()}`}>
             <div className="flex">

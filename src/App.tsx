@@ -42,6 +42,12 @@ function App() {
     }
   }, [state]);
 
+  useEffect(() => {
+    if(next){
+      
+    }
+  }, [next]);
+
 
   const updateCount = (correct: boolean) => {
     if (correct) {
@@ -56,6 +62,10 @@ function App() {
   const changeStatus = (isCorrect: boolean) => {
     updateCount(isCorrect)
   }
+  const resetStatus = () => {
+    setState(0);
+    setNext(false);
+  }
 
 
 
@@ -66,6 +76,7 @@ function App() {
         state={state}
         next={next}
         onStatusChange={changeStatus}
+        onReset={resetStatus}
         problemtext={problem?.problemText}
         description={problem?.description} />
     </div>
