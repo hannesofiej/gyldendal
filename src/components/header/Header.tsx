@@ -1,9 +1,11 @@
+import './Header.css'
+
 type HeaderProps = {
     text?: string;
 };
-function Header({ text }: HeaderProps) {
+const Header: React.FC<HeaderProps> = ({ text }) => {
     return (
-        <header className="">
+        <header className="header">
             <p>
                 {text}
             </p>

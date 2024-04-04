@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import TextField from '../textField/TextField';
 import Text from '../text/Text';
 import Button from '../button/Button';
@@ -11,25 +11,35 @@ import './Form.css';
 interface FormProps {
     problemtext?: string;
     description?: string;
-    incorrect: number;
-    inputId?: string;
+    state: number;
+    next: boolean;
     onStatusChange: (status: boolean) => void;
 }
 
-const Form: React.FC<FormProps> = ({ problemtext, description, incorrect, inputId, onStatusChange }) => {
+const Form: React.FC<FormProps> = ({ next, problemtext, description, state, onStatusChange }) => {
     const [inputValue, setInputValue] = useState('');
     const [checkValue, setCheckValue] = useState(false);
+    const [correcting, setCorrecting] = useState(false);
+
+    let inputId: string = ''
+
     const textArray = problemtext?.split(/({{.+?}})/g);
+    textArray?.forEach((item) => {
+        if (item.includes("{{") && item.includes("}}")) {
+            const id = item.replace("{{", '').replace("}}", '')
+            inputId = id
+
+        }
+    })
 
     useEffect(() => {
         const postAnswer = async () => {
             try {
-                const body = { inputId: inputValue }
+                const body = { [inputId]: inputValue }
                 const data = await postData(
                     'https://glkltp5rvo76hkmz4fraevhshu0yluco.lambda-url.eu-central-1.on.aws/check',
                     body
                 );
-                console.log(data)
                 onStatusChange(data.isCorrect)
                 setCheckValue(false)
             } catch (err) {
@@ -47,36 +57,55 @@ const Form: React.FC<FormProps> = ({ problemtext, description, incorrect, inputI
     const checkAnswer = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setCheckValue(true)
+        setCorrecting(false)
     }
     const changeAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCorrecting(true);
         setInputValue(event.target.value);
-        console.log(event.target.id)
     }
+    const checkFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+        setCorrecting(true);
+    }
+
+    const classNames = () => {
+        let classes = ''
+        if (correcting) {
+            classes += "correcting "
+        } else {
+            classes += state < 0 ? 'failed' + state : (state > 0 ? 'success' : '')
+
+        }
+        return classes
+    }
+    
     return (
-        <form className={`form ${incorrect > 0 ? 'failed-' + incorrect : ''}`}>
+        <form className={`form ${classNames()}`}>
             <div className="flex">
-
-                <Dog incorrect={incorrect} />
-
+                <Dog state={correcting ? 2 : state} />
                 <div>
                     <SpeechBubble description={description} />
                     <div>
-                        {textArray?.map((item) => {
+                        {textArray?.map((item, index) => {
                             const isInput = item.includes("{{");
                             if (isInput) {
                                 return <TextField
+                                    key={index}
                                     value={inputValue}
                                     inputId={inputId}
+                                    onFocus={checkFocus}
                                     onChange={changeAnswer} />
                             } else {
-                                return <Text text={item} />
+                                return <Text text={item} key={index} />
                             }
                         })}
                     </div>
                 </div>
             </div>
-            <Button incorrect={incorrect} text="Tjek mit svar"
-                onClick={checkAnswer} />
+            <div className='button-container'>
+                <Button
+                    text={next ? 'Næste opgave' : 'Tjek mit svar'}
+                    onClick={checkAnswer} />
+            </div>
         </form>
     );
 };

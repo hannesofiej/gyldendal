@@ -1,52 +1,30 @@
 .App {
+  --grey-1:#D9DBDE;
+  --grey-2:#717683;
+  --blue-1:#2078C9;
+  --yellow-1:#E28902;
+  --yellow-2:#E28902;
+  --green-1: #11B72B;
+  --red-1: #E77070;
+  --red-2: #D71010;
+  --red-3:#CC1212;
+}
+
+
+.App {
   text-align: left;
   font-family: "Roboto", sans-serif;
   font-style: normal;
-  display: grid;
-  max-width: 800px;
+  font-size:1.125rem;
+  max-width: 1280px;
   margin:20px auto;
+  padding:10rem;
+}
+@media (max-width: 1280px) {
+  .App{
+    padding:5rem;
+  }
 }
 .flex{
   display:flex;
-}
-
-.kvik{
-  font-size: 18px;
-}
-
-.text-field{
-  width: 2rem;
-  padding:.8rem;
-  border: solid 2px #D9DBDE;
-  border-radius: 4px;
-}
-.text-field.icon{
-  background-image: url(./assets/Blyant.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 16px;
-}
-.text-field.failed-1{
-  border-color:#E77070;
-}
-.text-field.failed-2{
-  border-color:#D71010;
-}
-
-.speechbubble{
-  display: inline-block;
-  border:solid 2px #2078C9;
-  padding:10px;
-  font-style: italic;
-}
-
-.speechbubble::after{
-  display:block;
-  content:"";
-  width: 0px;
-   height: 0px;
-   border-style: solid;
-   border-width: 7px 12.1px 7px 0;
-   border-color: transparent #2078C9 transparent transparent;
-   transform: rotate(0deg);
 }

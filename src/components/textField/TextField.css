@@ -1,0 +1,38 @@
+.text-field{
+    width: 3rem;
+    padding:8px;
+    border: solid 2px var(--grey-1);
+    border-radius: 4px;
+    font-size:1.125rem;
+  }
+  .text-field.icon{
+    background-image: url(../../assets/Blyant.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+  }
+  .text-field:focus{
+    background-image: none;
+  }
+  .text-field:focus-visible{
+    outline-color:var(--blue-1);
+  }
+
+
+  /* States */
+  .success .text-field{
+    border-color:var(--green-1);
+    background-image: url(../../assets/svg/right.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right:24px;
+  }
+  .failed-1 .text-field{
+    border-color:var(--red-1);
+  }
+  .failed-2 .text-field{
+    border-color:var(--red-2);
+  }
+
+ 
+  

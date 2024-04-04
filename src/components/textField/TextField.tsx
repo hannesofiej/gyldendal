@@ -1,12 +1,13 @@
-import React from 'react';
+import './TextField.css';
 
 interface TextInputProps {
   inputId?: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const TextField: React.FC<TextInputProps> = ({ inputId, value, onChange }) => {
+const TextField: React.FC<TextInputProps> = ({ inputId, value, onChange, onFocus }) => {
   const isEmpty = value === '';
 
   return (
@@ -14,6 +15,7 @@ const TextField: React.FC<TextInputProps> = ({ inputId, value, onChange }) => {
       type="text"
       id={inputId}
       value={value}
+      onFocus={onFocus}
       onChange={onChange} />
   );
 };

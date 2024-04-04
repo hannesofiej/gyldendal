@@ -1,7 +1,7 @@
 type TextProps = {
     text: string;
 };
-function Text({ text }: TextProps) {
+const Text: React.FC<TextProps> = ({ text }) => {
     return (
         <span>
             {text}

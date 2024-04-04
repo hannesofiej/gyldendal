@@ -1,0 +1,11 @@
+  .speechbubble {
+    margin: 1rem 1rem;
+    border: 2px solid var(--blue-1);
+    border-radius: 2px;
+    padding: 0 1rem;
+    text-align: center;
+    font-style: italic;
+    position: relative;
+}
+
+  

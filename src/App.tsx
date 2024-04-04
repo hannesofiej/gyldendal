@@ -4,8 +4,6 @@ import { fetchData } from './lib/fetch';
 import './App.css';
 
 import Header from './components/header/Header';
-import SpeechBubble from './components/speechbubble/SpeechBubble';
-import Dog from './components/dog/Dog';
 import Form from './components/form/Form';
 
 
@@ -20,10 +18,8 @@ interface Problem {
 function App() {
 
   const [problem, setProblem] = useState<Problem>();
-  const [correct, setCorrect] = useState(true);
-  const [incorrect, setIncorrect] = useState(0);
+  const [state, setState] = useState(0);
   const [next, setNext] = useState(false);
-
 
 
   useEffect(() => {
@@ -40,16 +36,20 @@ function App() {
     fetchProblem();
   }, []);
 
+  useEffect(() => {
+    if (state === -2) {
+      setNext(true)
+    }
+  }, [state]);
+
 
   const updateCount = (correct: boolean) => {
     if (correct) {
       setNext(true)
+      setState(1)
     } else {
-      if (incorrect === 2) {
-        setNext(true)
-      } else {
-        setIncorrect(incorrect + 1)
-      }
+      setNext(false)
+      setState(state - 1)
     }
   }
 
@@ -58,11 +58,13 @@ function App() {
   }
 
 
+
   return (
     <div className="App">
       <Header text={problem?.introText} />
       <Form
-        incorrect={incorrect}
+        state={state}
+        next={next}
         onStatusChange={changeStatus}
         problemtext={problem?.problemText}
         description={problem?.description} />
