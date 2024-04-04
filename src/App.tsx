@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { fetchData } from './lib/fetch';
 import './App.css';
@@ -42,11 +41,6 @@ function App() {
     }
   }, [state]);
 
-  useEffect(() => {
-    if(next){
-      
-    }
-  }, [next]);
 
 
   const updateCount = (correct: boolean) => {
