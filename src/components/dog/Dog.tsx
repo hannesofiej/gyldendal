@@ -1,5 +1,5 @@
 
-import { ReactComponent as Minikvik } from '../../assets/svg/MiniKvik.svg'
+import { ReactComponent as Minikvik } from '../../assets/svg/minikvik.svg'
 import { ReactComponent as MinikvikCorrect } from '../../assets/svg/MiniKvikCorrect.svg'
 import { ReactComponent as MinikvikCorrecting } from '../../assets/svg/MiniKvikCorrecting.svg'
 import { ReactComponent as MinikvikWrong1 } from '../../assets/svg/MiniKvikWrong1.svg'

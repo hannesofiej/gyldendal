@@ -95,6 +95,7 @@ const Form: React.FC<FormProps> = ({ next, problemtext, description, state, onSt
                             if (isInput) {
                                 return <TextField
                                     key={index}
+                                    disabled={next}
                                     value={inputValue}
                                     inputId={inputId}
                                     onFocus={checkFocus}

@@ -5,7 +5,6 @@ button {
     padding: .6rem 3rem;
     margin: 0;
     text-decoration: none;
-    background: transparent;
     font-weight: 700;
     font-size: 1rem;
     line-height: 1;
@@ -14,7 +13,9 @@ button {
     -webkit-appearance: none;
     -moz-appearance: none;
     box-shadow: 0px 4px 4px 0px #121B303D;
-
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: 90% center;
 }
 
 .button:hover {
@@ -25,6 +26,7 @@ button {
 .success .button {
     border-color: var(--green-1);
     border-width: 2px;
+    background-image: url(../../assets/svg/arrow-next.svg);
 }
 
 .failed-1 .button {
@@ -35,4 +37,5 @@ button {
 .failed-2 .button {
     border-color: var(--red-2);
     border-width: 2px;
+    background-image: url(../../assets/svg/arrow-next.svg);
 }
